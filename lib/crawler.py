@@ -33,7 +33,7 @@ def get_appendcode_img():
 def do_login(appendCode):
     url  = "http://www.ticaihui.com/platform/sysadmin/login/login.dox"
     data = {"loginID":"4402026029",
-            "password":"151041",
+            "password":"******",
             "appendCode":appendCode,
         "operate":"loginClientByIVTNoWithAjax"}
     data = urllib.urlencode(data)
