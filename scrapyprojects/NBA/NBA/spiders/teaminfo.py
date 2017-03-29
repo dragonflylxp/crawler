@@ -5,7 +5,7 @@ from NBA.items import TeamItem
 
 teamlist_url = 'http://china.nba.com/static/data/league/divisionteamlist.json'
 teaminfo_url = 'http://china.nba.com/static/data/team/standing_{}.json'
-teamlogo_url = 'http://china.nba.com/media/img/teams/logos/{}_logo.svg' 
+teamlogo_url = 'http://china.nba.com/media/img/teams/logos/{}_logo.svg'
 
 class TeaminfoSpider(scrapy.Spider):
     name = "teaminfo"
@@ -15,7 +15,7 @@ class TeaminfoSpider(scrapy.Spider):
     def parse(self, response):
         try:
             teamindex = ujson.loads(response.body)
-            groups = teamindex.get("payload",{}).get("listGroups",[]) 
+            groups = teamindex.get("payload",{}).get("listGroups",[])
             for group in groups:
                 teams = group.get("teams",[])
                 for team in teams:
@@ -26,30 +26,34 @@ class TeaminfoSpider(scrapy.Spider):
 
     def teaminfo(self, response):
         try:
-            teaminfo = ujson.loads(response.body)  
-            team = teaminfo.get('payload',{}).get('team',{}) 
-            league = teaminfo.get('payload',{}).get('league',{}) 
-            season = teaminfo.get('payload',{}).get('season',{}) 
+            teaminfo = ujson.loads(response.body)
+            team = teaminfo.get('payload',{}).get('team',{})
+            league = teaminfo.get('payload',{}).get('league',{})
+            season = teaminfo.get('payload',{}).get('season',{})
 
             #team-profile
             profile = team.get('profile',{})
+            standings = team.get('standings',{})
+            coach = team.get('coach',{})
             item = TeamItem()
-            item['abbr'] = profile.get('abbr','') 
-            item['city'] = profile.get('city','') 
-            item['cityEn'] = profile.get('cityEn','') 
-            item['code'] = profile.get('code','') 
-            item['conference'] = profile.get('conference','') 
-            item['displayAbbr'] = profile.get('displayAbbr','') 
-            item['displayConference'] = profile.get('displayConference','') 
-            item['teamId'] = profile.get('id','') 
-            item['isAllStarTeam'] = profile.get('isAllStarTeam','') 
-            item['isLeagueTeam'] = profile.get('isLeagueTeam','') 
-            item['leagueId'] = profile.get('leagueId','') 
-            item['name'] = profile.get('name','') 
-            item['nameEn'] = profile.get('nameEn','') 
-            item['logo'] = teamlogo_url.format(profile.get('abbr','')) 
+            item['Abbr'] = profile.get('abbr','')
+            item['City'] = profile.get('city','')
+            item['CityEn'] = profile.get('cityEn','')
+            item['Code'] = profile.get('code','')
+            item['Conference'] = profile.get('conference','')
+            item['DisplayAbbr'] = profile.get('displayAbbr','')
+            item['DisplayConference'] = profile.get('displayConference','')
+            item['TeamID'] = profile.get('id','')
+            item['IsAllStarTeam'] = profile.get('isAllStarTeam','')
+            item['IsLeagueTeam'] = profile.get('isLeagueTeam','')
+            item['LeagueID'] = profile.get('leagueId','')
+            item['Name'] = profile.get('name','')
+            item['NameEn'] = profile.get('nameEn','')
+            item['Logo'] = teamlogo_url.format(profile.get('abbr',''))
+            item['ConfRank'] = standings.get('confRank',-1)
+            item['HeadCoach'] = coach.get('headCoach','')
             return item
         except Exception as ex:
             print(ex)
-            
-            
+
+

@@ -15,23 +15,19 @@ class NbaItem(scrapy.Item):
 
 class TeamItem(scrapy.Item):
     #profile
-    abbr = scrapy.Field()
-    city = scrapy.Field()
-    cityEn = scrapy.Field()
-    code = scrapy.Field()
-    conference = scrapy.Field()
-    displayAbbr = scrapy.Field()
-    displayConference = scrapy.Field()
-    teamId = scrapy.Field()
-    isAllStarTeam = scrapy.Field()
-    isLeagueTeam = scrapy.Field()
-    leagueId = scrapy.Field()
-    name = scrapy.Field()
-    nameEn = scrapy.Field()
-    logo = scrapy.Field()
-
-    #standings
-    #rank
-    #coach
-
-    
+    Abbr = scrapy.Field()
+    City = scrapy.Field()
+    CityEn = scrapy.Field()
+    Code = scrapy.Field()
+    Conference = scrapy.Field()
+    DisplayAbbr = scrapy.Field()
+    DisplayConference = scrapy.Field()
+    TeamID = scrapy.Field()
+    IsAllStarTeam = scrapy.Field()
+    IsLeagueTeam = scrapy.Field()
+    LeagueID = scrapy.Field()
+    Name = scrapy.Field()
+    NameEn = scrapy.Field()
+    Logo = scrapy.Field()
+    ConfRank = scrapy.Field()
+    HeadCoach= scrapy.Field()
