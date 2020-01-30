@@ -1,0 +1,7 @@
+scrapy
+scrapy_redis
+fake_useragent==0.1.11
+pika
+pyquery
+requests
+apscheduler
